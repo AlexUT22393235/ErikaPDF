@@ -16,7 +16,9 @@ namespace ApplicationCore.Interfaces
     // 
     public interface IColaboradorService
     {
-        Task<List<Colaborador>> GetAllAsync();
+        Task<List<Colaborador>> GetAllFiltersAsync(bool type, int year);
+        //Task<List<Colaborador>> GetAllProfesorsAsync(bool type);
+        //Task<List<Colaborador>> GetAllAsync();
         Task<Colaborador> GetByIdAsync(int id);
         //Task AddAsync(Colaborador colaborador);
         //Task UpdateAsync(Colaborador colaborador);

@@ -26,15 +26,29 @@ namespace Infraestructure.Services
             _context = context;
         }
 
-        // llamas al metodo getAll de igual manera que lo definiste en tu IColaboradorService
-        public async Task<List<Colaborador>> GetAllAsync()
+        public async Task<List<Colaborador>> GetAllFiltersAsync(bool type, int age)
         {
-            // await es para esperar osea que va a esperar a que _context que es tu BD.Colaboradores que es tu tabla te traiga la lista de los colaboradores
-            // ToListAsync(); es un metodo de .net no tienes que hacer mas eso ya te lo trae
-            return await _context.Colaboradores.ToListAsync();
+            return await _context.Colaboradores
+                .Where(c => c.edad == age && c.es_Profesor == type)
+                .ToListAsync();
         }
 
-        // llamamos al metodo de buscar un colaborador igual que en IColaboradorService y le pasamos el paramtro de igual manera
+        //public async Task<List<Colaborador>> GetAllProfesorsAsync(bool type)
+        //{
+        //    return await _context.Colaboradores
+        //        .Where(c => c.es_Profesor == type)
+        //        .ToListAsync();
+        //}
+
+        // llamas al metodo getAll de igual manera que lo definiste en tu IColaboradorService
+        //public async Task<List<Colaborador>> GetAllAsync()
+        //{
+        //    // await es para esperar osea que va a esperar a que _context que es tu BD.Colaboradores que es tu tabla te traiga la lista de los colaboradores
+        //    // ToListAsync(); es un metodo de .net no tienes que hacer mas eso ya te lo trae
+        //    return await _context.Colaboradores.ToListAsync();
+        //}
+
+        //// llamamos al metodo de buscar un colaborador igual que en IColaboradorService y le pasamos el paramtro de igual manera
         public async Task<Colaborador> GetByIdAsync(int id)
         {
             // lo mismo, esperara a que traiga el colaborador el metodo FindAsync(id); pasandole el id ya lo hace solo

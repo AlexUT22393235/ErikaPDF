@@ -19,5 +19,9 @@ namespace Domain.Entities
         public int edad { get; set; } 
         public DateTime cumpleaños { get; set; }
         public bool es_Profesor { get; set; }
+
+        public DateTime fecha_Creacion { get; set; }
+
+        public List<Administradores> Administradores { get; set; }
     }
 }

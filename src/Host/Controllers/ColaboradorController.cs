@@ -1,10 +1,12 @@
 ﻿using ApplicationCore.Commands.ColaboradorCommand;
 using ApplicationCore.Interfaces;
 using DevExpress.CodeParser;
+using Domain.Entities;
 using Infraestructure.EventHandlers.ColaboradorHandler;
 using Infraestructure.Services;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Host.Controllers
     // recuerda siempre importar todo
@@ -33,17 +35,31 @@ namespace Host.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet("Get-filters/{type}/{age}")]
+        public async Task <IActionResult> GetAllForYear(bool type, int age)
+        {
+            var colaboradores = await _service.GetAllFiltersAsync(type, age);
+            return colaboradores == null ? NotFound() : Ok(colaboradores);
+        }
+
+        //[HttpGet("Get-administrators")]
+        //public async Task<IActionResult> GetAllProfesors(bool type)
+        //{
+        //    var colaboradores = await _service.GetAllProfesorsAsync(type);
+        //    return colaboradores == null ? NotFound() : Ok(colaboradores);
+        //}
+
         // creando la primera ruta que llamara a tu interface "IColaboradorService", el nombre es como quieras
         // yo le puse "get-colaboradores"
-        [HttpGet("get-colaboradores")]
-        // tipo public async y devuelve un task<IActionResult> este GetAll() es importante y es de .net es el metodo que ya tiene definido
-        public async Task<IActionResult> GetAll()
-        {
-            // creas tus colaboradores que seran el resultado de la respuesta de la peticion a tu interface osea tu servicio
-            var colaboradores = await _service.GetAllAsync();
-            // retornas OK y los colaboradores
-            return Ok(colaboradores);
-        }
+        //[HttpGet("get-colaboradores")]
+        //// tipo public async y devuelve un task<IActionResult> este GetAll() es importante y es de .net es el metodo que ya tiene definido
+        //public async Task<IActionResult> GetAll()
+        //{
+        //    // creas tus colaboradores que seran el resultado de la respuesta de la peticion a tu interface osea tu servicio
+        //    var colaboradores = await _service.GetAllAsync();
+        //    // retornas OK y los colaboradores
+        //    return Ok(colaboradores);
+        //}
 
         // creando el traer por id, de igual manera lo llamas como quieras pero importante el {id} es un parametro por lo que si lo cambias
         // igual tienes que cambiar esto GetById(int id) y GetByIdAsync(id); porque ahi es donde le pasas el id serian igual que como le pongas

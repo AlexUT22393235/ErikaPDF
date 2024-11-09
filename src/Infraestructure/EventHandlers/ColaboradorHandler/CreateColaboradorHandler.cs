@@ -40,6 +40,16 @@ namespace Infraestructure.EventHandlers.ColaboradorHandler
                 cumpleaños = command.cumpleaños,
                 es_Profesor = command.es_Profesor
             };
+
+            if (command.es_Profesor)
+            {
+                //var administrador = new Administradores
+                //{
+
+                //};
+
+                //await _context.AddAsync();
+            }
             // usas el await y luego tu _context osea tu BD y usas el metodo ya definido AddAsync y le pasas los parametros de tu variable
             // que quieres crear y el cancellationToken
             await _context.AddAsync(colaborador, cancellationToken);
